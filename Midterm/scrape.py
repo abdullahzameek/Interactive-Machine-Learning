@@ -3,10 +3,10 @@ from selenium import webdriver
 import requests
 import time
 
-url = 'https://m.facebook.com/profile.php?id=1185494961476520&ref=content_filter'
-file2 = open("cncData.txt","w+") 
+url = 'https://m.facebook.com/NYUSecrets/'
+file2 = open("secretsData.txt","w+") 
 
-driver = webdriver.Chrome(executable_path="/home/abdullahz/Desktop/InteractiveML/chromedriver")
+driver = webdriver.Chrome(executable_path="/home/abdullahz/Desktop/InteractiveML/Midterm/chromedriver")
 driver.get(url)
 
 SCROLL_PAUSE_TIME = 4.5
