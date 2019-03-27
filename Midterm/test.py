@@ -8,10 +8,10 @@ import os
 import time
 
 #path_to_file = tf.keras.utils.get_file('mergedData.txt')
-path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
+#path_to_file = tf.keras.utils.get_file('shakespeare.txt', 'https://storage.googleapis.com/download.tensorflow.org/data/shakespeare.txt')
 
 # Read, then decode for py2 compat.
-text = open(path_to_file, 'rb').read().decode(encoding='utf-8')
+text = open("mergedDataNYU.txt", 'rb').read().decode(encoding='utf-8')
 # length of text is the number of characters in it
 print ('Length of text: {} characters'.format(len(text)))
 
@@ -155,6 +155,18 @@ EPOCHS=3
 
 history = model.fit(dataset.repeat(), epochs=EPOCHS, steps_per_epoch=steps_per_epoch, callbacks=[checkpoint_callback])
 
+
+tf.train.latest_checkpoint(checkpoint_dir)
+
+model = build_model(vocab_size, embedding_dim, rnn_units, batch_size=1)
+
+model.load_weights(tf.train.latest_checkpoint(checkpoint_dir))
+
+model.build(tf.TensorShape([1, None]))
+
+model.summary()
+
+
 def generate_text(model, start_string):
   # Evaluation step (generating text using the learned model)
 
@@ -191,5 +203,5 @@ def generate_text(model, start_string):
       text_generated.append(idx2char[predicted_id])
 
   return (start_string + ''.join(text_generated))
-
-print(generate_text(model, start_string=u"ROMEO: "))
+  
+print(generate_text(model, start_string=u"Abu Dhabi "))
