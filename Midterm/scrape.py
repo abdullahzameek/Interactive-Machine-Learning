@@ -3,8 +3,9 @@ from selenium import webdriver
 import requests
 import time
 
-url = 'https://m.facebook.com/NYUSecrets/'
-file2 = open("secretsData.txt","w+") 
+count = 0
+url = 'https://m.facebook.com/profile.php?id=250320155116643&ref=content_filter/'
+file2 = open("cncDataNew.txt","w+") 
 
 driver = webdriver.Chrome(executable_path="/home/abdullahz/Desktop/InteractiveML/Midterm/chromedriver")
 driver.get(url)
@@ -14,10 +15,11 @@ SCROLL_PAUSE_TIME = 4.5
 # Get scroll height
 last_height = driver.execute_script("return document.body.scrollHeight")
 
-while True:
+while(count < 10):
+    count+=1
     # Scroll down to bottom
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
+    
     # Wait to load page
     time.sleep(SCROLL_PAUSE_TIME)
 
